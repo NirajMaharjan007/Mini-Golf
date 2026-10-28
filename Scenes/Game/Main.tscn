@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://r4r7n8e4gac"]
+
+[ext_resource type="PackedScene" uid="uid://bvdr53g2ev2wd" path="res://Scenes/Game/Level.tscn" id="1_1wrua"]
+[ext_resource type="Script" uid="uid://cpuhaxcxri8bf" path="res://Scripts/Main.cs" id="1_cyew3"]
+[ext_resource type="PackedScene" uid="uid://c75ycsikekbvr" path="res://Scenes/Game/Ball.tscn" id="2_dfwoq"]
+
+[node name="Main" type="Node2D" unique_id=602427853]
+script = ExtResource("1_cyew3")
+
+[node name="Level" parent="." unique_id=697953712 instance=ExtResource("1_1wrua")]
+
+[node name="Ball" parent="." unique_id=299005381 instance=ExtResource("2_dfwoq")]
+position = Vector2(128, 426)
+
+[node name="Camera2D" type="Camera2D" parent="Ball" unique_id=1254000181]
+limit_left = 0
+limit_top = 0
+position_smoothing_enabled = true
