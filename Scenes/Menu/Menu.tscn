@@ -1,5 +1,9 @@
 [gd_scene format=3 uid="uid://cir51xtbo1pd6"]
 
+[ext_resource type="Theme" uid="uid://6shp5ck1tnja" path="res://Assets/Theme/kenneyUI.tres" id="1_1kgdg"]
+[ext_resource type="Script" uid="uid://c6uitntgw1m30" path="res://Scripts/Menu.cs" id="1_kqkty"]
+[ext_resource type="Theme" uid="uid://mbsg4xqnedxi" path="res://Assets/Theme/kenneyUI-red.tres" id="2_3kh17"]
+
 [node name="Menu" type="Control" unique_id=1155775935]
 layout_mode = 3
 anchors_preset = 15
@@ -7,3 +11,42 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_kqkty")
+
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=1733153868]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_1kgdg")
+
+[node name="CenterContainer" type="CenterContainer" parent="PanelContainer" unique_id=2086537285]
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="ButtonContainer" type="VBoxContainer" parent="PanelContainer/CenterContainer" unique_id=175714867]
+custom_minimum_size = Vector2(255, 0)
+custom_maximum_size = Vector2(350, -1)
+clip_contents = true
+layout_mode = 2
+theme_override_constants/separation = 16
+alignment = 1
+
+[node name="Start" type="Button" parent="PanelContainer/CenterContainer/ButtonContainer" unique_id=1583049346]
+layout_mode = 2
+text = "START"
+
+[node name="Option" type="Button" parent="PanelContainer/CenterContainer/ButtonContainer" unique_id=285915542]
+layout_mode = 2
+text = "OPTION"
+
+[node name="Credit" type="Button" parent="PanelContainer/CenterContainer/ButtonContainer" unique_id=1790643040]
+layout_mode = 2
+text = "CREDIT"
+
+[node name="Exit" type="Button" parent="PanelContainer/CenterContainer/ButtonContainer" unique_id=1285809425]
+layout_mode = 2
+theme = ExtResource("2_3kh17")
+text = "EXIT"

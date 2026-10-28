@@ -282,7 +282,7 @@ sources/1 = SubResource("TileSetAtlasSource_d44bt")
 [node name="Level" type="Node2D" unique_id=697953712]
 
 [node name="Back" type="Parallax2D" parent="." unique_id=2115190987]
-scroll_scale = Vector2(0.32, 1)
+scroll_scale = Vector2(0.25, 1)
 repeat_size = Vector2(1024, 0)
 repeat_times = 2
 
@@ -292,6 +292,7 @@ scale = Vector2(5, 5)
 texture = ExtResource("1_od0v8")
 
 [node name="Cloud" type="Parallax2D" parent="." unique_id=2117519495]
+scroll_scale = Vector2(0.32, 1)
 repeat_size = Vector2(1600, 0)
 autoscroll = Vector2(5, 0)
 repeat_times = 2
@@ -319,6 +320,7 @@ texture = ExtResource("2_upmdd")
 
 [node name="DarkTree" type="Parallax2D" parent="." unique_id=884045133]
 scroll_scale = Vector2(0.56, 1)
+scroll_offset = Vector2(0, 14)
 repeat_size = Vector2(1440, 0)
 repeat_times = 4
 
@@ -328,7 +330,7 @@ scale = Vector2(2.5, 2.5)
 texture = ExtResource("1_d44bt")
 
 [node name="FrontTree" type="Parallax2D" parent="." unique_id=1559984915]
-scroll_scale = Vector2(1.2, 1)
+scroll_offset = Vector2(0, 9)
 repeat_size = Vector2(1350, 0)
 repeat_times = 4
 
