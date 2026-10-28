@@ -33,16 +33,15 @@ public partial class Menu : Control
 
     private async void HandleChanges()
     {
-        Print($"Pressed");
-
-        var result = await ChangeTask();
-
-        Print($"Result {result}");
-    }
-
-    private System.Threading.Tasks.Task<string> ChangeTask()
-    {
-        return System.Threading.Tasks.Task.FromResult("Hello");
+        try
+        {
+            SceneManager.NextScene = "res://Scenes/Game/Main.tscn";
+            await SceneManager.LoadingScene();
+        }
+        catch (System.Exception e)
+        {
+            PrintErr("ERROR: " + e.Message);
+        }
     }
 
     // Called every frame. 'delta' is the elapsed time since the previous frame.
