@@ -10,7 +10,7 @@ public static class SceneManager
     {
         private static CanvasLayer _canvas;
         private static ColorRect _rect;
-        private const float DefaultDuration = 0.48f;
+        private const float DefaultDuration = 0.500f;
 
         private static void EnsureCreated(SceneTree tree)
         {
@@ -58,6 +58,50 @@ public static class SceneManager
         }
     }
 
+    public static async Task ChangeScene(string scene)
+    {
+        var tree = (SceneTree)Engine.GetMainLoop();
+
+        await Fade.Out(tree); // Autoload fade out
+
+        var err = tree.ChangeSceneToFile(scene);
+        if (err != Error.Ok)
+        {
+            await Fade.In(tree);
+            return;
+        }
+
+        await tree.ToSignal(tree, SceneTree.SignalName.ProcessFrame);
+
+        await Fade.In(tree);
+    }
+
+    public static async Task LoadingScene()
+    {
+        string defaultScene = "res://Scenes/Menu/Loading.tscn";
+
+        var tree = (SceneTree)Engine.GetMainLoop();
+
+        // 1. Fade to black
+        await Fade.Out(tree);
+
+        // 2. Switch scene
+        var err = tree.ChangeSceneToFile(defaultScene);
+        if (err != Error.Ok)
+        {
+            PrintErr($"SceneManager: failed to change scene to {defaultScene}: {err}");
+            // Fade back in so the player isn't stuck on a black screen
+            await Fade.In(tree);
+            return;
+        }
+
+        // 3. Wait one frame so the new scene is actually in the tree and _Ready has run
+        await tree.ToSignal(tree, SceneTree.SignalName.ProcessFrame);
+
+        // 4. Fade back in
+        await Fade.In(tree);
+    }
+
     public static async Task ExitScene()
     {
         try
@@ -73,4 +117,6 @@ public static class SceneManager
             System.Environment.Exit(1);
         }
     }
+
+    public static string NextScene { get; set; }
 }
