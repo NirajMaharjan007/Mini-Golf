@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="MiniGolf"
-run/main_scene="uid://r4r7n8e4gac"
+run/main_scene="uid://cir51xtbo1pd6"
 config/features=PackedStringArray("4.7", "C#", "GL Compatibility")
 config/icon="res://icon.svg"
 
