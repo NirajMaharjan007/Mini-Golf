@@ -15,11 +15,23 @@ public partial class Ball : RigidBody2D
     [Export]
     private float StopSpeed = 5f; // below this speed the ball re-freezes
 
-    private bool _isDragging;
-    private bool _launched;
+    [Export]
+    private float StopTime = 0.25f;
+
+    [Export]
+    private float FlightLinearDamp = 0.6f; // air drag, higher = slows faster
+
+    [Export]
+    private float FlightAngularDamp = 1.0f; // spin slows down too
+
+    private float _slowTimer;
+    private bool _isDragging,
+        _launched;
     private Vector2 _anchor;
 
     private Line2D aimLine;
+
+    public int Counter { private set; get; } = 0;
 
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
@@ -58,18 +70,27 @@ public partial class Ball : RigidBody2D
         }
         else if (_launched)
         {
-            CheckStopped();
+            CheckStopped((float)delta);
         }
     }
 
-    private void CheckStopped()
+    private void CheckStopped(float delta)
     {
-        if (LinearVelocity.Length() < StopSpeed && GetContactCount() > 0)
+        // No contact requirement: just "slow for long enough"
+        if (LinearVelocity.Length() < StopSpeed)
+            _slowTimer += delta;
+        else
+            _slowTimer = 0f;
+
+        if (_slowTimer >= StopTime)
         {
             _launched = false;
+            _slowTimer = 0f;
             Freeze = true;
             LinearVelocity = Vector2.Zero;
             AngularVelocity = 0;
+            LinearDamp = 0;
+            AngularDamp = 0;
         }
     }
 
@@ -101,6 +122,11 @@ public partial class Ball : RigidBody2D
             return;
         }
 
+        LinearDampMode = DampMode.Replace;
+        AngularDampMode = DampMode.Replace;
+        LinearDamp = FlightLinearDamp;
+        AngularDamp = FlightAngularDamp;
+
         _launched = true;
         Freeze = false;
 
@@ -110,12 +136,18 @@ public partial class Ball : RigidBody2D
 
     private void OnBodyInputEvent(Node viewport, InputEvent @event, long shapeIdx)
     {
-        if (_isDragging || _launched)
+        if (_isDragging)
+            return;
+
+        // Allow grabbing when at rest, OR when slow enough to count as stopped
+        if (_launched && LinearVelocity.Length() > StopSpeed)
             return;
 
         if (@event is InputEventMouseButton mb && mb.ButtonIndex == MouseButton.Left && mb.Pressed)
         {
+            // _slowTimer = 0f;
             _isDragging = true;
+            _launched = false;
             _anchor = GlobalPosition;
 
             Freeze = true;
