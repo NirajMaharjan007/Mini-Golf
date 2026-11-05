@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dvk3mviufoweg" path="res://Scripts/Ball.cs" id="1_y1sd5"]
 [ext_resource type="Texture2D" uid="uid://d3x7unjsaw5wi" path="res://Assets/Ball/golf.png" id="2_y1sd5"]
+[ext_resource type="FontFile" uid="uid://bs47e1f40nt53" path="res://Assets/Theme/SpicyRice-Regular.ttf" id="3_q21d6"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_y1sd5"]
 rough = true
@@ -40,3 +41,17 @@ joint_mode = 1
 begin_cap_mode = 2
 round_precision = 16
 antialiased = true
+
+[node name="Label" type="Label" parent="." unique_id=860045379]
+visible = false
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -29.25
+offset_top = -21.0
+offset_right = 29.75
+offset_bottom = -7.0
+grow_horizontal = 2
+theme_override_fonts/font = ExtResource("3_q21d6")
+theme_override_font_sizes/font_size = 9
+text = "Ready to Shoot"

@@ -3,6 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://bvdr53g2ev2wd" path="res://Scenes/Game/Level.tscn" id="1_1wrua"]
 [ext_resource type="Script" uid="uid://cpuhaxcxri8bf" path="res://Scripts/Main.cs" id="1_cyew3"]
 [ext_resource type="PackedScene" uid="uid://c75ycsikekbvr" path="res://Scenes/Game/Ball.tscn" id="2_dfwoq"]
+[ext_resource type="Theme" uid="uid://6shp5ck1tnja" path="res://Assets/Theme/kenneyUI.tres" id="4_y4a8c"]
 
 [node name="Main" type="Node2D" unique_id=602427853]
 script = ExtResource("1_cyew3")
@@ -13,8 +14,54 @@ script = ExtResource("1_cyew3")
 position = Vector2(128, 426)
 MaxPull = 200.0
 PowerMultiplier = 4.0
+StopSpeed = 8.0
+FlightLinearDamp = 0.64
 
 [node name="Camera2D" type="Camera2D" parent="Ball" unique_id=1254000181]
 limit_left = 0
 limit_top = 0
 position_smoothing_enabled = true
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=799737755]
+
+[node name="Panel" type="Panel" parent="CanvasLayer" unique_id=1495552914]
+anchors_preset = -1
+anchor_left = 0.002
+anchor_top = 0.003
+anchor_right = 0.091000006
+anchor_bottom = 0.049000002
+offset_left = -0.048000097
+offset_top = -0.3039999
+offset_right = -0.18400574
+offset_bottom = 0.36799622
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource("4_y4a8c")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/Panel" unique_id=994704364]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource("4_y4a8c")
+alignment = 1
+
+[node name="Counter" type="Label" parent="CanvasLayer/Panel/HBoxContainer" unique_id=948687323]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "Counter:"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Number" type="Label" parent="CanvasLayer/Panel/HBoxContainer" unique_id=2069292293]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
