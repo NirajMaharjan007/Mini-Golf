@@ -24,6 +24,9 @@ public partial class Ball : RigidBody2D
     [Export]
     private float FlightAngularDamp = 1.0f; // spin slows down too
 
+    private AudioStreamPlayer2D hit,
+        bounce;
+
     private float _slowTimer;
     private bool _isDragging,
         _launched;
@@ -31,12 +34,16 @@ public partial class Ball : RigidBody2D
 
     private Line2D aimLine;
 
+    private Tween _hitTween;
+
     public int Counter { private set; get; } = 0;
 
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
         base._Ready();
+
+        hit = GetNode<AudioStreamPlayer2D>("Hit");
 
         aimLine = GetNode<Line2D>("Aim2D");
         if (aimLine != null)
@@ -132,7 +139,44 @@ public partial class Ball : RigidBody2D
         Freeze = false;
 
         aimLine.ClearPoints();
+
+        CallDeferred(nameof(PlayHitSound));
+
         SetDeferred(RigidBody2D.PropertyName.LinearVelocity, launchVel);
+    }
+
+    private void PlayHitSound()
+    {
+        const float HitMinDb = -18f; // volume at weakest valid shot
+        const float HitMaxDb = 0f; // volume at full pull
+        const float HitFadeIn = 0.04f;
+        const float HitFadeOut = 0.35f;
+
+        _hitTween?.Kill();
+
+        _hitTween = CreateTween();
+
+        float pullRatio = GetPullRatio();
+
+        float targetDb = Mathf.Lerp(HitMinDb, HitMaxDb, pullRatio);
+
+        hit.PitchScale = (float)RandRange(0.95, 1.05) + pullRatio * 0.1f; // stronger = slightly higher
+        hit.VolumeDb = -40f;
+        hit.Play();
+
+        // Quick fade in (removes the click)
+        _hitTween
+            .TweenProperty(hit, "volume_db", targetDb, HitFadeIn)
+            .SetTrans(Tween.TransitionType.Sine)
+            .SetEase(Tween.EaseType.Out);
+
+        // Smooth fade out toward the end
+        _hitTween
+            .TweenProperty(hit, "volume_db", -40f, HitFadeOut)
+            .SetTrans(Tween.TransitionType.Sine)
+            .SetEase(Tween.EaseType.In);
+
+        _hitTween.TweenCallback(Callable.From(hit.Stop));
     }
 
     private void OnBodyInputEvent(Node viewport, InputEvent @event, long shapeIdx)
@@ -157,6 +201,20 @@ public partial class Ball : RigidBody2D
         }
     }
 
+    private float GetPullRatio()
+    {
+        Vector2 pull = (GetGlobalMousePosition() - _anchor).LimitLength(MaxPull);
+
+        return pull.Length() / MaxPull;
+    }
+
+    private bool IsTargetPull()
+    {
+        Vector2 pull = (GetGlobalMousePosition() - _anchor).LimitLength(MaxPull);
+
+        return pull.Length() < 2f;
+    }
+
     private void UpdateAimLine()
     {
         if (aimLine == null)
@@ -168,9 +226,7 @@ public partial class Ball : RigidBody2D
 
         Vector2 pull = (GetGlobalMousePosition() - _anchor).LimitLength(MaxPull);
 
-        float pullLen = pull.Length();
-
-        if (pullLen < 2f)
+        if (IsTargetPull())
         {
             aimLine.ClearPoints();
             return;
@@ -184,7 +240,7 @@ public partial class Ball : RigidBody2D
         Vector2 vel = -pull * PowerMultiplier;
         float speed = vel.Length(); // > 0 guaranteed by the check above
 
-        float pullRatio = pullLen / MaxPull;
+        float pullRatio = GetPullRatio();
         float distance = Mathf.Lerp(MinAimDistance, BaseAimDistance, pullRatio);
 
         // Time to travel `distance` along the velocity direction (not just X)
