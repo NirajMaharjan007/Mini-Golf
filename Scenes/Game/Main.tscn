@@ -11,6 +11,8 @@ script = ExtResource("1_cyew3")
 
 [node name="Ball" parent="." unique_id=299005381 instance=ExtResource("2_dfwoq")]
 position = Vector2(128, 426)
+MaxPull = 200.0
+PowerMultiplier = 4.0
 
 [node name="Camera2D" type="Camera2D" parent="Ball" unique_id=1254000181]
 limit_left = 0

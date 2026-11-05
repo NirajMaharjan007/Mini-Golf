@@ -287,36 +287,55 @@ repeat_size = Vector2(1024, 0)
 repeat_times = 2
 
 [node name="Sky" type="Sprite2D" parent="Back" unique_id=554998845]
-position = Vector2(400, 400)
-scale = Vector2(5, 5)
+position = Vector2(400, 386)
+scale = Vector2(4, 4)
 texture = ExtResource("1_od0v8")
 
 [node name="Cloud" type="Parallax2D" parent="." unique_id=2117519495]
 scroll_scale = Vector2(0.32, 1)
 repeat_size = Vector2(1600, 0)
-autoscroll = Vector2(5, 0)
+autoscroll = Vector2(5.6, 0)
 repeat_times = 2
 
 [node name="Cloud" type="Sprite2D" parent="Cloud" unique_id=931880645]
-position = Vector2(953, 202)
+position = Vector2(198, 188)
 scale = Vector2(2, 2)
 texture = ExtResource("2_upmdd")
 
-[node name="Cloud2" type="Sprite2D" parent="Cloud" unique_id=1189233835]
-position = Vector2(459, 116.00001)
+[node name="Cloud2" type="Parallax2D" parent="." unique_id=1473600766]
+scroll_scale = Vector2(0.32, 1)
+repeat_size = Vector2(1600, 0)
+autoscroll = Vector2(2, 0)
+repeat_times = 2
+
+[node name="Cloud" type="Sprite2D" parent="Cloud2" unique_id=2039748555]
+position = Vector2(644, 95.00001)
 scale = Vector2(2.5, 2.5)
 texture = ExtResource("2_upmdd")
 flip_h = true
 
-[node name="Cloud3" type="Sprite2D" parent="Cloud" unique_id=1053510806]
-position = Vector2(324, 194)
+[node name="Cloud3" type="Parallax2D" parent="." unique_id=1511711046]
+scroll_scale = Vector2(0.32, 1)
+repeat_size = Vector2(1600, 0)
+autoscroll = Vector2(8, 0)
+repeat_times = 2
+
+[node name="Cloud" type="Sprite2D" parent="Cloud3" unique_id=102025583]
+position = Vector2(768, 213)
+scale = Vector2(3, 3)
 texture = ExtResource("2_upmdd")
 flip_h = true
 
-[node name="Cloud4" type="Sprite2D" parent="Cloud" unique_id=16726963]
-position = Vector2(447, 282)
-scale = Vector2(3.2, 3.2)
+[node name="Cloud4" type="Parallax2D" parent="." unique_id=213806650]
+scroll_scale = Vector2(0.32, 1)
+repeat_size = Vector2(1600, 0)
+autoscroll = Vector2(6, 0)
+repeat_times = 2
+
+[node name="Cloud" type="Sprite2D" parent="Cloud4" unique_id=1043205040]
+position = Vector2(247, 144)
 texture = ExtResource("2_upmdd")
+flip_h = true
 
 [node name="DarkTree" type="Parallax2D" parent="." unique_id=884045133]
 scroll_scale = Vector2(0.56, 1)

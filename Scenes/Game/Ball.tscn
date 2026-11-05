@@ -10,6 +10,15 @@ bounce = 0.15
 [sub_resource type="CircleShape2D" id="CircleShape2D_3evdj"]
 radius = 5.0
 
+[sub_resource type="Curve" id="Curve_3evdj"]
+_data = [Vector2(0, 0.52808994), 0.0, -0.49937567, 0, 0, Vector2(0.985, 0.078651786), 0.18220523, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_y1sd5"]
+colors = PackedColorArray(1, 1, 1, 0.6745098, 1, 1, 1, 0.16470589)
+metadata/_snap_enabled = true
+metadata/_snap_count = 32
+
 [node name="Ball" type="RigidBody2D" unique_id=299005381]
 physics_material_override = SubResource("PhysicsMaterial_y1sd5")
 freeze_mode = 1
@@ -21,3 +30,13 @@ texture = ExtResource("2_y1sd5")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1659104699]
 shape = SubResource("CircleShape2D_3evdj")
+
+[node name="Aim2D" type="Line2D" parent="." unique_id=1270472127]
+position = Vector2(4, 0)
+points = PackedVector2Array(6, 0, 103, 0)
+width_curve = SubResource("Curve_3evdj")
+gradient = SubResource("Gradient_y1sd5")
+joint_mode = 1
+begin_cap_mode = 2
+round_precision = 16
+antialiased = true
