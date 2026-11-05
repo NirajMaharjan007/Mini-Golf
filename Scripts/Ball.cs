@@ -105,6 +105,7 @@ public partial class Ball : RigidBody2D
             && !mb.Pressed
         )
         {
+            Counter++;
             Release();
         }
     }
