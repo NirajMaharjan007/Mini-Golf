@@ -12,7 +12,11 @@ public partial class Main : Node2D
 
     private Label count;
 
-    // private Ball
+    private Button pauseBtn;
+
+    private CanvasLayer pauseCanvas;
+
+    private Pause pause;
 
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
@@ -28,6 +32,31 @@ public partial class Main : Node2D
         camera.LimitBottom = GetWindow().Size.Y;
 
         Print("this is a limit " + camera.LimitBottom);
+
+        pauseCanvas = GetNode<CanvasLayer>("PauseCanvas");
+
+        pause = pauseCanvas.GetNode<Pause>("Pause");
+        pause.ResumeRequested += HandlePause;
+
+        pauseBtn = GetNode<Button>("CanvasLayer/HBoxContainer/Pause");
+        pauseBtn.Pressed += HandlePause;
+    }
+
+    public override void _Input(InputEvent @event)
+    {
+        base._Input(@event);
+
+        // if ()
+        // {
+
+        // }
+    }
+
+    private void HandlePause()
+    {
+        Print("Clicked" + pauseCanvas.Visible);
+        pauseCanvas.Visible = !pauseCanvas.Visible;
+        GetTree().Paused = !GetTree().Paused;
     }
 
     // Called every frame. 'delta' is the elapsed time since the previous frame.

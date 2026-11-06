@@ -1,0 +1,90 @@
+[gd_scene format=3 uid="uid://dm0bnn01add57"]
+
+[ext_resource type="Script" uid="uid://vg5be26oeoy5" path="res://Scripts/Pause.cs" id="1_p0tda"]
+[ext_resource type="Theme" uid="uid://6shp5ck1tnja" path="res://Assets/Theme/kenneyUI.tres" id="2_4hvdk"]
+[ext_resource type="Theme" uid="uid://mbsg4xqnedxi" path="res://Assets/Theme/kenneyUI-red.tres" id="2_fpcad"]
+[ext_resource type="Shader" uid="uid://ck0gt2fov5htf" path="res://Misc/Blur.gdshader" id="2_jfxj7"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_a037c"]
+bg_color = Color(0.42352942, 0.42352942, 0.42352942, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.18431373, 0.18431373, 0.18431373, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+corner_detail = 16
+shadow_color = Color(0, 0, 0, 0.38431373)
+shadow_size = 28
+shadow_offset = Vector2(8, 4)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_rh6kn"]
+shader = ExtResource("2_jfxj7")
+shader_parameter/sigma = 4.0
+shader_parameter/radius = 8
+shader_parameter/opacity = 1.0
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_7232d"]
+content_margin_left = 16.0
+content_margin_top = 4.0
+content_margin_right = 16.0
+content_margin_bottom = 4.0
+
+[node name="Pause" type="Panel" unique_id=20602851]
+process_mode = 3
+process_priority = 1
+custom_minimum_size = Vector2(200, 200)
+custom_maximum_size = Vector2(320, 320)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_a037c")
+script = ExtResource("1_p0tda")
+
+[node name="Outerpanel" type="PanelContainer" parent="." unique_id=969877473]
+material = SubResource("ShaderMaterial_rh6kn")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_7232d")
+
+[node name="InnerContainer" type="VBoxContainer" parent="Outerpanel" unique_id=1417176574]
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="TitleContainer" type="VBoxContainer" parent="Outerpanel/InnerContainer" unique_id=943132399]
+layout_mode = 2
+size_flags_vertical = 2
+theme = ExtResource("2_4hvdk")
+alignment = 1
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Outerpanel/InnerContainer/TitleContainer" unique_id=952627310]
+layout_mode = 2
+text = "PAUSE MENU"
+fit_content = true
+scroll_active = false
+horizontal_alignment = 1
+
+[node name="BtnContainer" type="VBoxContainer" parent="Outerpanel/InnerContainer" unique_id=1012944823]
+layout_mode = 2
+size_flags_vertical = 3
+theme = ExtResource("2_4hvdk")
+
+[node name="Resume" type="Button" parent="Outerpanel/InnerContainer/BtnContainer" unique_id=1811901466]
+layout_mode = 2
+text = "RESUME"
+
+[node name="Exit" type="Button" parent="Outerpanel/InnerContainer/BtnContainer" unique_id=1647942843]
+layout_mode = 2
+theme = ExtResource("2_fpcad")
+text = "EXIT"
