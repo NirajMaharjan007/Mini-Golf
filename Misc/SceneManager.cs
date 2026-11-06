@@ -48,6 +48,7 @@ public static class SceneManager
         {
             _rect.MouseFilter = Control.MouseFilterEnum.Stop;
             var tween = tree.CreateTween();
+            tween.SetPauseMode(Tween.TweenPauseMode.Process);
             tween
                 .TweenProperty(_rect, "color:a", to, duration)
                 .From(from)
