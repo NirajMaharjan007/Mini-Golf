@@ -46,10 +46,18 @@ public partial class Main : Node2D
     {
         base._Input(@event);
 
-        // if ()
-        // {
+        if (@event is InputEventKey keyEvent)
+        {
+            if (keyEvent.Pressed && !keyEvent.Echo)
+            {
+                if (keyEvent.Keycode == Key.Escape)
+                {
+                    Print("Escape pressed!");
 
-        // }
+                    HandlePause();
+                }
+            }
+        }
     }
 
     private void HandlePause()
