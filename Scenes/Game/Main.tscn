@@ -4,6 +4,15 @@
 [ext_resource type="Script" uid="uid://cpuhaxcxri8bf" path="res://Scripts/Main.cs" id="1_cyew3"]
 [ext_resource type="PackedScene" uid="uid://c75ycsikekbvr" path="res://Scenes/Game/Ball.tscn" id="2_dfwoq"]
 [ext_resource type="Theme" uid="uid://6shp5ck1tnja" path="res://Assets/Theme/kenneyUI.tres" id="4_y4a8c"]
+[ext_resource type="Texture2D" uid="uid://6d0rpto7eam8" path="res://Assets/Icons/pause.png" id="5_c6dyv"]
+[ext_resource type="PackedScene" uid="uid://dm0bnn01add57" path="res://Scenes/Extra/Pause.tscn" id="6_5k2w5"]
+[ext_resource type="Shader" uid="uid://ck0gt2fov5htf" path="res://Misc/Blur.gdshader" id="7_ushg2"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5k2w5"]
+shader = ExtResource("7_ushg2")
+shader_parameter/sigma = 8.00000037674012
+shader_parameter/radius = 6
+shader_parameter/opacity = 1.0
 
 [node name="Main" type="Node2D" unique_id=602427853]
 script = ExtResource("1_cyew3")
@@ -65,3 +74,38 @@ theme_override_colors/font_color = Color(0, 0, 0, 1)
 text = "0"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer" unique_id=682289786]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -124.0
+offset_top = 2.0
+offset_right = -5.0
+offset_bottom = 43.0
+grow_horizontal = 0
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme = ExtResource("4_y4a8c")
+
+[node name="Pause" type="Button" parent="CanvasLayer/HBoxContainer" unique_id=1862821150]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+size_flags_horizontal = 10
+size_flags_vertical = 0
+icon = ExtResource("5_c6dyv")
+autowrap_trim_flags = 192
+icon_alignment = 1
+
+[node name="PauseCanvas" type="CanvasLayer" parent="." unique_id=168263816]
+visible = false
+
+[node name="ColorRect" type="ColorRect" parent="PauseCanvas" unique_id=1829031206]
+material = SubResource("ShaderMaterial_5k2w5")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Pause" parent="PauseCanvas" unique_id=100788528 instance=ExtResource("6_5k2w5")]
