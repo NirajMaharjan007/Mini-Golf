@@ -9,6 +9,7 @@ content_margin_right = 8.0
 bg_color = Color(0.2159017, 0.21590173, 0.21590161, 1)
 
 [node name="Loading" type="Control" unique_id=1019898999]
+process_mode = 3
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0

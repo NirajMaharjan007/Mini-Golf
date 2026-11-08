@@ -33,23 +33,25 @@ position_smoothing_enabled = true
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=799737755]
 
-[node name="Panel" type="Panel" parent="CanvasLayer" unique_id=1495552914]
-anchors_preset = -1
-anchor_left = 0.002
-anchor_top = 0.003
-anchor_right = 0.091000006
-anchor_bottom = 0.049000002
-offset_left = -0.048000097
-offset_top = -0.3039999
-offset_right = -0.18400574
-offset_bottom = 0.36799622
+[node name="Main" type="HBoxContainer" parent="CanvasLayer" unique_id=71661691]
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 2.0
+offset_top = 2.0
+offset_right = -6.0
+offset_bottom = 43.0
 grow_horizontal = 2
-grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Panel" type="Panel" parent="CanvasLayer/Main" unique_id=1495552914]
+custom_maximum_size = Vector2(120, -1)
+layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme = ExtResource("4_y4a8c")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/Panel" unique_id=994704364]
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/Main/Panel" unique_id=994704364]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -61,38 +63,31 @@ size_flags_vertical = 3
 theme = ExtResource("4_y4a8c")
 alignment = 1
 
-[node name="Counter" type="Label" parent="CanvasLayer/Panel/HBoxContainer" unique_id=948687323]
+[node name="Counter" type="Label" parent="CanvasLayer/Main/Panel/HBoxContainer" unique_id=948687323]
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 text = "Counter:"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Number" type="Label" parent="CanvasLayer/Panel/HBoxContainer" unique_id=2069292293]
+[node name="Number" type="Label" parent="CanvasLayer/Main/Panel/HBoxContainer" unique_id=2069292293]
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 text = "0"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer" unique_id=682289786]
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -124.0
-offset_top = 2.0
-offset_right = -5.0
-offset_bottom = 43.0
-grow_horizontal = 0
-size_flags_horizontal = 3
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/Main" unique_id=682289786]
+layout_mode = 2
+size_flags_horizontal = 10
 size_flags_vertical = 4
 theme = ExtResource("4_y4a8c")
 
-[node name="Pause" type="Button" parent="CanvasLayer/HBoxContainer" unique_id=1862821150]
+[node name="Pause" type="Button" parent="CanvasLayer/Main/HBoxContainer" unique_id=1862821150]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
-size_flags_horizontal = 10
-size_flags_vertical = 0
+size_flags_horizontal = 3
+size_flags_vertical = 4
 icon = ExtResource("5_c6dyv")
 autowrap_trim_flags = 192
 icon_alignment = 1

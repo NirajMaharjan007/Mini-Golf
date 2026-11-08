@@ -84,6 +84,10 @@ theme = ExtResource("2_4hvdk")
 layout_mode = 2
 text = "RESUME"
 
+[node name="Back" type="Button" parent="Outerpanel/InnerContainer/BtnContainer" unique_id=1811255192]
+layout_mode = 2
+text = "BACK TO MENU"
+
 [node name="Exit" type="Button" parent="Outerpanel/InnerContainer/BtnContainer" unique_id=1647942843]
 layout_mode = 2
 theme = ExtResource("2_fpcad")
