@@ -14,6 +14,8 @@ public partial class Menu : Control
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
+        base._Ready();
+
         var btnContainer = GetNode<VBoxContainer>("PanelContainer/CenterContainer/ButtonContainer");
 
         startBtn = btnContainer.GetNode<Button>("Start");

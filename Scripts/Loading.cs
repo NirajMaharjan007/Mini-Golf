@@ -15,6 +15,8 @@ public partial class Loading : Control
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
+        base._Ready();
+
         var container = GetNode<VBoxContainer>("PanelContainer/VBoxContainer");
 
         progressBar = container.GetNode<ProgressBar>("ProgressBar");
@@ -39,7 +41,7 @@ public partial class Loading : Control
         if (_switching)
             return;
 
-        var randomize = (float)RandRange(0.08, 0.24);
+        var randomize = (float)RandRange(0.1, 0.58);
 
         Print($"{randomize} {_nextPath}");
 

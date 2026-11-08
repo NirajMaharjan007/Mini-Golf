@@ -10,6 +10,7 @@ public partial class Pause : Panel
     public delegate void ResumeRequestedEventHandler();
 
     private Button resumeBtn,
+        backBtn,
         exitBtn;
 
     // Called when the node enters the scene tree for the first time.
@@ -20,8 +21,25 @@ public partial class Pause : Panel
         resumeBtn = btnContainer.GetNode<Button>("Resume");
         resumeBtn.Pressed += HandleResume;
 
+        backBtn = btnContainer.GetNode<Button>("Back");
+        backBtn.Pressed += HandleMainMenu;
+
         exitBtn = btnContainer.GetNode<Button>("Exit");
         exitBtn.Pressed += HandleExit;
+    }
+
+    private async void HandleMainMenu()
+    {
+        try
+        {
+            SceneManager.NextScene = "res://Scenes/Menu/Menu.tscn";
+            await SceneManager.LoadingScene();
+        }
+        catch (System.Exception ex)
+        {
+            PrintErr($"ERROR: {ex.Message}\nCause: {ex.Source}");
+            System.Environment.Exit(1);
+        }
     }
 
     private void HandleResume()
@@ -44,6 +62,7 @@ public partial class Pause : Panel
         try
         {
             resumeBtn.Pressed -= HandleResume;
+            backBtn.Pressed -= HandleMainMenu;
             exitBtn.Pressed -= HandleExit;
         }
         catch (System.Exception ex)

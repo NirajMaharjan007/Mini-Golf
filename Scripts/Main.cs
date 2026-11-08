@@ -21,9 +21,13 @@ public partial class Main : Node2D
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
+        base._Ready();
+
+        GetTree().Paused = false;
+
         ball = GetNode<Ball>("Ball");
 
-        count = GetNode<Label>("CanvasLayer/Panel/HBoxContainer/Number");
+        count = GetNode<Label>("CanvasLayer/Main/Panel/HBoxContainer/Number");
         count.Text = ball.Counter.ToString();
 
         camera = GetNode<Camera2D>("Ball/Camera2D");
@@ -38,7 +42,7 @@ public partial class Main : Node2D
         pause = pauseCanvas.GetNode<Pause>("Pause");
         pause.ResumeRequested += HandlePause;
 
-        pauseBtn = GetNode<Button>("CanvasLayer/HBoxContainer/Pause");
+        pauseBtn = GetNode<Button>("CanvasLayer/Main/HBoxContainer/Pause");
         pauseBtn.Pressed += HandlePause;
     }
 
