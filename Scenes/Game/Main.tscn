@@ -4,9 +4,12 @@
 [ext_resource type="Script" uid="uid://cpuhaxcxri8bf" path="res://Scripts/Main.cs" id="1_cyew3"]
 [ext_resource type="PackedScene" uid="uid://c75ycsikekbvr" path="res://Scenes/Game/Ball.tscn" id="2_dfwoq"]
 [ext_resource type="Theme" uid="uid://6shp5ck1tnja" path="res://Assets/Theme/kenneyUI.tres" id="4_y4a8c"]
+[ext_resource type="Texture2D" uid="uid://cup3brai4ktd5" path="res://Assets/Icons/undo.png" id="5_02r4d"]
 [ext_resource type="Texture2D" uid="uid://6d0rpto7eam8" path="res://Assets/Icons/pause.png" id="5_c6dyv"]
 [ext_resource type="PackedScene" uid="uid://dm0bnn01add57" path="res://Scenes/Extra/Pause.tscn" id="6_5k2w5"]
 [ext_resource type="Shader" uid="uid://ck0gt2fov5htf" path="res://Misc/Blur.gdshader" id="7_ushg2"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ushg2"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_5k2w5"]
 shader = ExtResource("7_ushg2")
@@ -77,16 +80,90 @@ text = "0"
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="WindPanel" type="Panel" parent="CanvasLayer/Main" unique_id=678200783]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxEmpty_ushg2")
+
+[node name="Panel" type="Panel" parent="CanvasLayer/Main/WindPanel" unique_id=417585096]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -93.20508
+offset_top = -20.0
+offset_right = 93.20508
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("4_y4a8c")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/Main/WindPanel/Panel" unique_id=493284510]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -90.52637
+offset_top = -21.0
+offset_right = 90.52637
+offset_bottom = 21.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="CanvasLayer/Main/WindPanel/Panel/HBoxContainer" unique_id=631259975]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "Wind Strength:"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="WindDirection" type="RichTextLabel" parent="CanvasLayer/Main/WindPanel/Panel/HBoxContainer" unique_id=776135618]
+custom_minimum_size = Vector2(20, 0)
+custom_maximum_size = Vector2(40, -1)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/normal_font_size = 28
+theme_override_font_sizes/bold_font_size = 28
+bbcode_enabled = true
+text = "🠚
+"
+fit_content = true
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Count" type="Label" parent="CanvasLayer/Main/WindPanel/Panel/HBoxContainer" unique_id=443911709]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(1.4824272e-05, 0.2993467, 0.83124584, 1)
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/Main" unique_id=682289786]
 layout_mode = 2
-size_flags_horizontal = 10
+size_flags_horizontal = 8
 size_flags_vertical = 4
 theme = ExtResource("4_y4a8c")
+
+[node name="Reset" type="Button" parent="CanvasLayer/Main/HBoxContainer" unique_id=764185503]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+icon = ExtResource("5_02r4d")
 
 [node name="Pause" type="Button" parent="CanvasLayer/Main/HBoxContainer" unique_id=1862821150]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
-size_flags_horizontal = 3
+size_flags_horizontal = 10
 size_flags_vertical = 4
 icon = ExtResource("5_c6dyv")
 autowrap_trim_flags = 192

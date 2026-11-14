@@ -38,10 +38,26 @@ public partial class Ball : RigidBody2D
 
     public int Counter { private set; get; } = 0;
 
+    public bool IsStop { private set; get; } = false;
+
+    private void InitPhysics()
+    {
+        // 1. Golf ball physics material
+        var mat = new PhysicsMaterial { Bounce = 0.42f, Friction = 0.92f };
+        PhysicsMaterialOverride = mat;
+
+        // 2. Other crucial golf ball settings
+        Mass = 0.045f;
+        CanSleep = true;
+        ContinuousCd = CcdMode.CastRay; // Prevents tunneling
+    }
+
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
         base._Ready();
+
+        InitPhysics();
 
         hit = GetNode<AudioStreamPlayer2D>("Hit");
 
@@ -93,6 +109,7 @@ public partial class Ball : RigidBody2D
         {
             _launched = false;
             _slowTimer = 0f;
+            IsStop = true;
             Freeze = true;
             LinearVelocity = Vector2.Zero;
             AngularVelocity = 0;
@@ -120,6 +137,8 @@ public partial class Ball : RigidBody2D
     private void Release()
     {
         _isDragging = false;
+        IsStop = false;
+
         Vector2 pull = (GetGlobalMousePosition() - _anchor).LimitLength(MaxPull);
         Vector2 launchVel = -pull * PowerMultiplier;
 

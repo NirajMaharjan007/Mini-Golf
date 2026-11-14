@@ -10,20 +10,24 @@ public partial class Main : Node2D
 
     private Ball ball;
 
-    private Label count;
+    private Label count,
+        windLabel;
 
-    private Button pauseBtn;
+    private RichTextLabel windDirectionLabel;
+
+    private Button pauseBtn,
+        resetBtn;
 
     private CanvasLayer pauseCanvas;
 
     private Pause pause;
 
+    private bool _windApplied = false;
+
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
         base._Ready();
-
-        GetTree().Paused = false;
 
         ball = GetNode<Ball>("Ball");
 
@@ -44,6 +48,9 @@ public partial class Main : Node2D
 
         pauseBtn = GetNode<Button>("CanvasLayer/Main/HBoxContainer/Pause");
         pauseBtn.Pressed += HandlePause;
+
+        resetBtn = GetNode<Button>("CanvasLayer/Main/HBoxContainer/Reset");
+        resetBtn.Pressed += HandleReset;
     }
 
     public override void _Input(InputEvent @event)
@@ -64,6 +71,29 @@ public partial class Main : Node2D
         }
     }
 
+    private static float GetRandomWindStrength(Settings.WindStrength strength)
+    {
+        var result = System.Math.Round(Settings.GetWindStrength(strength), 2);
+
+        return (float)result;
+    }
+
+    private async void HandleReset()
+    {
+        try
+        {
+            var scene = GetTree().CurrentScene.SceneFilePath;
+
+            // If you want to show the loading screen and fade:
+            await SceneManager.ChangeScene(scene);
+        }
+        catch (System.Exception ex)
+        {
+            PrintErr($"Error: {ex.Message}\nCause: {ex.Source}");
+            System.Environment.Exit(1);
+        }
+    }
+
     private void HandlePause()
     {
         Print("Clicked" + pauseCanvas.Visible);
@@ -75,5 +105,64 @@ public partial class Main : Node2D
     public override void _Process(double delta)
     {
         count.Text = ball.Counter.ToString();
+
+        Print("IsStop " + ball.IsStop);
+
+        if (ball.IsStop)
+        {
+            if (!_windApplied)
+            {
+                _windApplied = true; // Lock it so it doesn't run again until reset
+
+                var random = (Settings.WindStrength)RandRange(0, 4);
+                var randomDirection = (Settings.WindDirection)RandRange(0, 1);
+
+                Print($"{random} {randomDirection}");
+
+                windLabel.Text = GetRandomWindStrength(random).ToString();
+                windDirectionLabel.Text = randomDirection.Equals(Settings.WindDirection.Left)
+                    ? Settings.LeftArrow
+                    : Settings.RightArrow;
+            }
+        }
+        else
+        {
+            // Reset the flag when the ball is moving, so it can trigger again next time it stops
+            _windApplied = false;
+        }
+    }
+
+    public override void _EnterTree()
+    {
+        base._EnterTree();
+
+        GetTree().Paused = false;
+
+        windLabel = GetNode<Label>("CanvasLayer/Main/WindPanel/Panel/HBoxContainer/Count");
+        windLabel.Text = GetRandomWindStrength(Settings.WindStrength.Weak).ToString();
+
+        windDirectionLabel = GetNode<RichTextLabel>(
+            "CanvasLayer/Main/WindPanel/Panel/HBoxContainer/WindDirection"
+        );
+        windDirectionLabel.Text = Settings.LeftArrow;
+        PrintRich(Settings.RightArrow);
+    }
+
+    public override void _ExitTree()
+    {
+        base._ExitTree();
+
+        try
+        {
+            resetBtn.Pressed -= HandleReset;
+            pauseBtn.Pressed -= HandlePause;
+
+            QueueFree();
+        }
+        catch (System.Exception ex)
+        {
+            PrintErr($"Error: {ex.Message}\nCause: {ex.Source}");
+            System.Environment.Exit(1);
+        }
     }
 }
