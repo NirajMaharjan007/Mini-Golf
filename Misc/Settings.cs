@@ -18,8 +18,9 @@ public static class Settings
     }
 
     // only for rich Text Label
-    public const string RightArrow = "[b]\U0001F81A[/b]",
-        LeftArrow = "[b]\U0001F818[/b]";
+    public const string RightArrow = "[b]\U0001F87A[/b]",
+        LeftArrow = "[b]\U0001F878[/b]",
+        Cross = "[b]\U0001F7AE[/b]";
 
     public static bool SfxEnabled { get; set; }
 
@@ -47,4 +48,8 @@ public static class Settings
             _ => 0,
         };
     }
+
+    public static float CurrentWindDirection { set; get; }
+
+    public static float CurrentWindStrength { set; get; }
 }
