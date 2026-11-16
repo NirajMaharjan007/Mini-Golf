@@ -30,6 +30,7 @@ public partial class Main : Node2D
         base._Ready();
 
         ball = GetNode<Ball>("Ball");
+        ball.IsStop = true;
 
         count = GetNode<Label>("CanvasLayer/Main/Panel/HBoxContainer/Number");
         count.Text = ball.Counter.ToString();
@@ -114,15 +115,24 @@ public partial class Main : Node2D
             {
                 _windApplied = true; // Lock it so it doesn't run again until reset
 
-                var random = (Settings.WindStrength)RandRange(0, 4);
+                //TODO:DEBUG
+                var randomWindStrength = (Settings.WindStrength)RandRange(0, 4);
                 var randomDirection = (Settings.WindDirection)RandRange(0, 1);
 
-                Print($"{random} {randomDirection}");
+                var getRandomWindStrength = GetRandomWindStrength(randomWindStrength);
 
-                windLabel.Text = GetRandomWindStrength(random).ToString();
-                windDirectionLabel.Text = randomDirection.Equals(Settings.WindDirection.Left)
-                    ? Settings.LeftArrow
-                    : Settings.RightArrow;
+                Settings.CurrentWindStrength = getRandomWindStrength;
+                Settings.CurrentWindDirection = Settings.GetWindDirection(randomDirection);
+
+                windLabel.Text = getRandomWindStrength.ToString();
+                if (getRandomWindStrength == 0)
+                    windDirectionLabel.Text = Settings.Cross;
+                else
+                    windDirectionLabel.Text = randomDirection.Equals(Settings.WindDirection.Left)
+                        ? Settings.LeftArrow
+                        : Settings.RightArrow;
+
+                Print($"{randomWindStrength} {randomDirection}");
             }
         }
         else
@@ -145,7 +155,6 @@ public partial class Main : Node2D
             "CanvasLayer/Main/WindPanel/Panel/HBoxContainer/WindDirection"
         );
         windDirectionLabel.Text = Settings.LeftArrow;
-        PrintRich(Settings.RightArrow);
     }
 
     public override void _ExitTree()

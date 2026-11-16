@@ -1,5 +1,6 @@
 using System;
 using Godot;
+using MiniGolf.Misc;
 using static Godot.GD;
 
 namespace MiniGolf.Scripts;
@@ -38,12 +39,12 @@ public partial class Ball : RigidBody2D
 
     public int Counter { private set; get; } = 0;
 
-    public bool IsStop { private set; get; } = false;
+    public bool IsStop { set; get; } = true;
 
     private void InitPhysics()
     {
         // 1. Golf ball physics material
-        var mat = new PhysicsMaterial { Bounce = 0.42f, Friction = 0.92f };
+        var mat = new PhysicsMaterial { Bounce = 0.40f, Friction = 0.92f };
         PhysicsMaterialOverride = mat;
 
         // 2. Other crucial golf ball settings
@@ -74,6 +75,46 @@ public partial class Ball : RigidBody2D
         InputPickable = true; // default is true, but be explicit
         InputEvent += OnBodyInputEvent;
         FreezeMode = FreezeModeEnum.Kinematic;
+    }
+
+    public override void _IntegrateForces(PhysicsDirectBodyState2D state)
+    {
+        bool isOnFloor = false;
+
+        if (Freeze || IsStop)
+            return;
+
+        if (state.LinearVelocity.Length() < 15f)
+            return;
+
+        // Print($"contanct {state.GetContactCount()}");
+
+        // Loop through all collisions this frame
+        for (int i = 0; i < state.GetContactCount(); i++)
+        {
+            // Get the normal of the surface we are touching
+            Vector2 normal = state.GetContactLocalNormal(i);
+
+            // Print("Normal Y " + normal.Y);
+
+            // If the normal points mostly UP (negative Y in Godot), we are on the floor
+            if (normal.Y < -0.7f)
+            {
+                isOnFloor = true;
+                break;
+            }
+        }
+
+        Print("Floor " + isOnFloor);
+
+        if (!isOnFloor)
+        {
+            float strength = Settings.CurrentWindStrength;
+            float direction = Settings.CurrentWindDirection;
+
+            float windPower = strength * 24.00f;
+            state.ApplyCentralForce(new Vector2(direction * windPower, 0));
+        }
     }
 
     // Called every frame. 'delta' is the elapsed time since the previous frame.

@@ -23,6 +23,8 @@ metadata/_snap_count = 32
 [node name="Ball" type="RigidBody2D" unique_id=299005381]
 physics_material_override = SubResource("PhysicsMaterial_y1sd5")
 freeze_mode = 1
+contact_monitor = true
+max_contacts_reported = 4
 script = ExtResource("1_y1sd5")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=214254252]
