@@ -47,3 +47,4 @@ antialiased = true
 [node name="Hit" type="AudioStreamPlayer2D" parent="." unique_id=1341640458]
 stream = ExtResource("3_q21d6")
 attenuation = 1.866067
+bus = &"SFX"

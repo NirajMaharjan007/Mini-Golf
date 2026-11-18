@@ -1,0 +1,120 @@
+[gd_scene format=3 uid="uid://cu1hwua18jenx"]
+
+[ext_resource type="Script" uid="uid://c7jkyml8trtsv" path="res://Scripts/OptionMenu.cs" id="1_abs8f"]
+[ext_resource type="Theme" uid="uid://6shp5ck1tnja" path="res://Assets/Theme/kenneyUI.tres" id="2_dyq8d"]
+[ext_resource type="Theme" uid="uid://mbsg4xqnedxi" path="res://Assets/Theme/kenneyUI-red.tres" id="3_1rgy2"]
+[ext_resource type="Theme" uid="uid://bnhngmri4tfgr" path="res://Assets/Theme/kenneyUI-green.tres" id="3_abs8f"]
+[ext_resource type="FontFile" uid="uid://bs47e1f40nt53" path="res://Assets/Theme/SpicyRice-Regular.ttf" id="4_dyq8d"]
+
+[node name="OptionMenu" type="Control" unique_id=2086004986]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_abs8f")
+
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=1620688689]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_dyq8d")
+
+[node name="CenterContainer" type="CenterContainer" parent="PanelContainer" unique_id=1001800006]
+layout_mode = 2
+
+[node name="MainContainer" type="VBoxContainer" parent="PanelContainer/CenterContainer" unique_id=304555851]
+custom_minimum_size = Vector2(255, 0)
+custom_maximum_size = Vector2(350, -1)
+clip_contents = true
+layout_mode = 2
+theme_override_constants/separation = 24
+alignment = 1
+
+[node name="SFXContainer" type="HBoxContainer" parent="PanelContainer/CenterContainer/MainContainer" unique_id=1417582379]
+layout_mode = 2
+theme_override_constants/separation = 16
+alignment = 1
+
+[node name="Label" type="Label" parent="PanelContainer/CenterContainer/MainContainer/SFXContainer" unique_id=1787183009]
+layout_mode = 2
+text = "SFX Enable"
+
+[node name="BtnContainer" type="HBoxContainer" parent="PanelContainer/CenterContainer/MainContainer/SFXContainer" unique_id=602654181]
+layout_mode = 2
+
+[node name="CheckButton" type="CheckButton" parent="PanelContainer/CenterContainer/MainContainer/SFXContainer/BtnContainer" unique_id=199637201]
+process_mode = 3
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+flat = true
+
+[node name="Label" type="Label" parent="PanelContainer/CenterContainer/MainContainer/SFXContainer/BtnContainer" unique_id=353682731]
+layout_mode = 2
+text = "NO"
+
+[node name="BGMContainer" type="HBoxContainer" parent="PanelContainer/CenterContainer/MainContainer" unique_id=1618940107]
+layout_mode = 2
+theme_override_constants/separation = 16
+alignment = 1
+
+[node name="Label" type="Label" parent="PanelContainer/CenterContainer/MainContainer/BGMContainer" unique_id=962659947]
+layout_mode = 2
+text = "BGM  Enable"
+
+[node name="BtnContainer" type="HBoxContainer" parent="PanelContainer/CenterContainer/MainContainer/BGMContainer" unique_id=2066375144]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="CheckButton" type="CheckButton" parent="PanelContainer/CenterContainer/MainContainer/BGMContainer/BtnContainer" unique_id=1473071697]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+flat = true
+
+[node name="Label" type="Label" parent="PanelContainer/CenterContainer/MainContainer/BGMContainer/BtnContainer" unique_id=1740962101]
+layout_mode = 2
+text = "NO"
+
+[node name="WindContainer" type="HBoxContainer" parent="PanelContainer/CenterContainer/MainContainer" unique_id=1751842685]
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_constants/separation = 16
+alignment = 1
+
+[node name="Label" type="Label" parent="PanelContainer/CenterContainer/MainContainer/WindContainer" unique_id=661103410]
+layout_mode = 2
+text = "Wind Strength"
+
+[node name="OptionButton" type="OptionButton" parent="PanelContainer/CenterContainer/MainContainer/WindContainer" unique_id=1069219860]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+
+[node name="BtnContainer" type="HBoxContainer" parent="PanelContainer/CenterContainer/MainContainer" unique_id=219009857]
+layout_mode = 2
+size_flags_vertical = 6
+theme_override_constants/separation = 28
+alignment = 1
+
+[node name="Save" type="Button" parent="PanelContainer/CenterContainer/MainContainer/BtnContainer" unique_id=2142772749]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme = ExtResource("3_abs8f")
+theme_override_fonts/font = ExtResource("4_dyq8d")
+text = "SAVE
+"
+
+[node name="Back" type="Button" parent="PanelContainer/CenterContainer/MainContainer/BtnContainer" unique_id=85616616]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme = ExtResource("3_1rgy2")
+text = "BACK"
