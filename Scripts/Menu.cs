@@ -22,6 +22,8 @@ public partial class Menu : Control
         startBtn.Pressed += HandleChanges;
 
         optionBtn = btnContainer.GetNode<Button>("Option");
+        optionBtn.Pressed += HandleOption;
+
         creditBtn = btnContainer.GetNode<Button>("Credit");
 
         exitBtn = btnContainer.GetNode<Button>("Exit");
@@ -44,6 +46,11 @@ public partial class Menu : Control
         {
             PrintErr("ERROR: " + e.Message);
         }
+    }
+
+    private async void HandleOption()
+    {
+        await SceneManager.ChangeScene("res://Scenes/Menu/OptionMenu.tscn");
     }
 
     // Called every frame. 'delta' is the elapsed time since the previous frame.
