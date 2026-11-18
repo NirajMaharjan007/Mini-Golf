@@ -22,6 +22,8 @@ public partial class Main : Node2D
 
     private Pause pause;
 
+    private AudioStreamPlayer2D windSFX;
+
     private bool _windApplied = false;
 
     // Called when the node enters the scene tree for the first time.
@@ -147,6 +149,8 @@ public partial class Main : Node2D
         base._EnterTree();
 
         GetTree().Paused = false;
+
+        windSFX = GetNode<AudioStreamPlayer2D>("WindSFX");
 
         windLabel = GetNode<Label>("CanvasLayer/Main/WindPanel/Panel/HBoxContainer/Count");
         windLabel.Text = GetRandomWindStrength(Settings.WindStrength.Weak).ToString();
