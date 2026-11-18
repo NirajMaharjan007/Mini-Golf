@@ -22,10 +22,6 @@ public static class Settings
         LeftArrow = "[b]\U0001F878[/b]",
         Cross = "[b]\U0001F7AE[/b]";
 
-    public static bool SfxEnabled { get; set; }
-
-    public static bool BGMEnabled { get; set; }
-
     public static float GetWindStrength(WindStrength strength)
     {
         return strength switch
@@ -48,6 +44,21 @@ public static class Settings
             _ => 0,
         };
     }
+
+    public static string GetWindStrengthText(WindStrength strength)
+    {
+        return strength switch
+        {
+            WindStrength.None => "None",
+            WindStrength.VeryWeak or WindStrength.Weak => "Weak",
+            WindStrength.Strong or WindStrength.VeryStrong => "Strong",
+            _ => "N/A",
+        };
+    }
+
+    public static bool SfxEnabled { get; set; }
+
+    public static bool BGMEnabled { get; set; }
 
     public static float CurrentWindDirection { set; get; }
 
