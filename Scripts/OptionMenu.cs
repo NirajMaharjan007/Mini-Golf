@@ -1,3 +1,4 @@
+using System;
 using Godot;
 using MiniGolf.Misc;
 using static Godot.GD;
@@ -20,20 +21,36 @@ public partial class OptionMenu : Control
     private Label sfxLabel,
         bgmLabel;
 
+    private Dialog dialog;
+    private CanvasLayer dialogCanvas;
+
+    public override void _EnterTree()
+    {
+        base._EnterTree();
+
+        dialogCanvas = GetNode<CanvasLayer>("CanvasLayer");
+        dialogCanvas.Visible = false;
+
+        dialog = dialogCanvas.GetNode<Dialog>("Dialog");
+        dialog.BackRequest += OnBackDialog;
+    }
+
     // Called when the node enters the scene tree for the first time.
+
     public override void _Ready()
     {
         var optionBtnContainer = GetNode<HBoxContainer>(
-            "PanelContainer/CenterContainer/MainContainer/BtnContainer"
+            "Panel/PanelContainer/InnerContainer/BtnContainer"
         );
 
         saveBtn = optionBtnContainer.GetNode<Button>("Save");
+        saveBtn.Pressed += HandleSave;
 
         backBtn = optionBtnContainer.GetNode<Button>("Back");
         backBtn.Pressed += HandleBack;
 
         windStrength = GetNode<OptionButton>(
-            "PanelContainer/CenterContainer/MainContainer/WindContainer/OptionButton"
+            "Panel/PanelContainer/InnerContainer/MainContainer/WindContainer/OptionButton"
         );
 
         var addedLabels = new System.Collections.Generic.HashSet<string>();
@@ -53,7 +70,7 @@ public partial class OptionMenu : Control
         }
 
         var sfxContainer = GetNode<HBoxContainer>(
-            "PanelContainer/CenterContainer/MainContainer/SFXContainer"
+            "Panel/PanelContainer/InnerContainer/MainContainer/SFXContainer"
         );
 
         sfxLabel = sfxContainer.GetNode<Label>("BtnContainer/Label");
@@ -66,7 +83,7 @@ public partial class OptionMenu : Control
         };
 
         var bgmContainer = GetNode<HBoxContainer>(
-            "PanelContainer/CenterContainer/MainContainer/BGMContainer"
+            "Panel/PanelContainer/InnerContainer/MainContainer/BGMContainer"
         );
 
         bgmLabel = bgmContainer.GetNode<Label>("BtnContainer/Label");
@@ -88,6 +105,16 @@ public partial class OptionMenu : Control
     private async void HandleBack()
     {
         await SceneManager.ChangeScene("res://Scenes/Menu/Menu.tscn");
+    }
+
+    private void OnBackDialog()
+    {
+        dialogCanvas.Visible = !dialog.Visible;
+    }
+
+    private void HandleSave()
+    {
+        dialogCanvas.Visible = true;
     }
 
     private void OnWindSelection(long index)

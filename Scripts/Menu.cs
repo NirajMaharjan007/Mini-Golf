@@ -16,7 +16,7 @@ public partial class Menu : Control
     {
         base._Ready();
 
-        var btnContainer = GetNode<VBoxContainer>("PanelContainer/CenterContainer/ButtonContainer");
+        var btnContainer = GetNode<VBoxContainer>("Panel/PanelContainer/ButtonContainer");
 
         startBtn = btnContainer.GetNode<Button>("Start");
         startBtn.Pressed += HandleChanges;

@@ -5,6 +5,37 @@
 [ext_resource type="Theme" uid="uid://mbsg4xqnedxi" path="res://Assets/Theme/kenneyUI-red.tres" id="3_1rgy2"]
 [ext_resource type="Theme" uid="uid://bnhngmri4tfgr" path="res://Assets/Theme/kenneyUI-green.tres" id="3_abs8f"]
 [ext_resource type="FontFile" uid="uid://bs47e1f40nt53" path="res://Assets/Theme/SpicyRice-Regular.ttf" id="4_dyq8d"]
+[ext_resource type="Shader" uid="uid://ck0gt2fov5htf" path="res://Misc/Blur.gdshader" id="6_sovmg"]
+[ext_resource type="PackedScene" uid="uid://cclgflj7ofhot" path="res://Scenes/Extra/Dialog.tscn" id="7_f47xe"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1rgy2"]
+bg_color = Color(0.21230483, 0.2123048, 0.21230495, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sovmg"]
+content_margin_left = 16.0
+content_margin_top = 8.0
+content_margin_right = 16.0
+content_margin_bottom = 8.0
+bg_color = Color(0.41960785, 0.41960785, 0.41960785, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.13682574, 0.13682574, 0.13682568, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+corner_detail = 16
+shadow_color = Color(0, 0, 0, 0.2)
+shadow_size = 28
+shadow_offset = Vector2(2, 4)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_y071n"]
+shader = ExtResource("6_sovmg")
+shader_parameter/sigma = 4.0
+shader_parameter/radius = 8
+shader_parameter/opacity = 1.0
 
 [node name="OptionMenu" type="Control" unique_id=2086004986]
 layout_mode = 3
@@ -15,95 +46,126 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_abs8f")
 
-[node name="PanelContainer" type="PanelContainer" parent="." unique_id=1620688689]
+[node name="Panel" type="Panel" parent="." unique_id=1706924621]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_1rgy2")
+
+[node name="PanelContainer" type="PanelContainer" parent="Panel" unique_id=1710693514]
+custom_maximum_size = Vector2(420, -1)
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -155.5
+offset_bottom = 155.5
+grow_horizontal = 2
+grow_vertical = 2
 theme = ExtResource("2_dyq8d")
+theme_override_styles/panel = SubResource("StyleBoxFlat_sovmg")
 
-[node name="CenterContainer" type="CenterContainer" parent="PanelContainer" unique_id=1001800006]
+[node name="InnerContainer" type="VBoxContainer" parent="Panel/PanelContainer" unique_id=1266031866]
 layout_mode = 2
-
-[node name="MainContainer" type="VBoxContainer" parent="PanelContainer/CenterContainer" unique_id=304555851]
-custom_minimum_size = Vector2(255, 0)
-custom_maximum_size = Vector2(350, -1)
-clip_contents = true
-layout_mode = 2
-theme_override_constants/separation = 24
 alignment = 1
 
-[node name="SFXContainer" type="HBoxContainer" parent="PanelContainer/CenterContainer/MainContainer" unique_id=1417582379]
+[node name="TextContainer" type="VBoxContainer" parent="Panel/PanelContainer/InnerContainer" unique_id=823057247]
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+
+[node name="Title" type="RichTextLabel" parent="Panel/PanelContainer/InnerContainer/TextContainer" unique_id=772387080]
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_font_sizes/normal_font_size = 24
+theme_override_font_sizes/bold_font_size = 24
+text = "Option Menu"
+fit_content = true
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MainContainer" type="VBoxContainer" parent="Panel/PanelContainer/InnerContainer" unique_id=304555851]
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_constants/separation = 8
+alignment = 1
+
+[node name="SFXContainer" type="HBoxContainer" parent="Panel/PanelContainer/InnerContainer/MainContainer" unique_id=1417582379]
+layout_mode = 2
+size_flags_vertical = 4
 theme_override_constants/separation = 16
 alignment = 1
 
-[node name="Label" type="Label" parent="PanelContainer/CenterContainer/MainContainer/SFXContainer" unique_id=1787183009]
+[node name="Label" type="Label" parent="Panel/PanelContainer/InnerContainer/MainContainer/SFXContainer" unique_id=1787183009]
 layout_mode = 2
 text = "SFX Enable"
 
-[node name="BtnContainer" type="HBoxContainer" parent="PanelContainer/CenterContainer/MainContainer/SFXContainer" unique_id=602654181]
+[node name="BtnContainer" type="HBoxContainer" parent="Panel/PanelContainer/InnerContainer/MainContainer/SFXContainer" unique_id=602654181]
 layout_mode = 2
 
-[node name="CheckButton" type="CheckButton" parent="PanelContainer/CenterContainer/MainContainer/SFXContainer/BtnContainer" unique_id=199637201]
+[node name="CheckButton" type="CheckButton" parent="Panel/PanelContainer/InnerContainer/MainContainer/SFXContainer/BtnContainer" unique_id=199637201]
 process_mode = 3
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 flat = true
 
-[node name="Label" type="Label" parent="PanelContainer/CenterContainer/MainContainer/SFXContainer/BtnContainer" unique_id=353682731]
+[node name="Label" type="Label" parent="Panel/PanelContainer/InnerContainer/MainContainer/SFXContainer/BtnContainer" unique_id=353682731]
 layout_mode = 2
 text = "NO"
 
-[node name="BGMContainer" type="HBoxContainer" parent="PanelContainer/CenterContainer/MainContainer" unique_id=1618940107]
+[node name="BGMContainer" type="HBoxContainer" parent="Panel/PanelContainer/InnerContainer/MainContainer" unique_id=1618940107]
 layout_mode = 2
+size_flags_vertical = 4
 theme_override_constants/separation = 16
 alignment = 1
 
-[node name="Label" type="Label" parent="PanelContainer/CenterContainer/MainContainer/BGMContainer" unique_id=962659947]
+[node name="Label" type="Label" parent="Panel/PanelContainer/InnerContainer/MainContainer/BGMContainer" unique_id=962659947]
 layout_mode = 2
 text = "BGM  Enable"
 
-[node name="BtnContainer" type="HBoxContainer" parent="PanelContainer/CenterContainer/MainContainer/BGMContainer" unique_id=2066375144]
+[node name="BtnContainer" type="HBoxContainer" parent="Panel/PanelContainer/InnerContainer/MainContainer/BGMContainer" unique_id=2066375144]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="CheckButton" type="CheckButton" parent="PanelContainer/CenterContainer/MainContainer/BGMContainer/BtnContainer" unique_id=1473071697]
+[node name="CheckButton" type="CheckButton" parent="Panel/PanelContainer/InnerContainer/MainContainer/BGMContainer/BtnContainer" unique_id=1473071697]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 flat = true
 
-[node name="Label" type="Label" parent="PanelContainer/CenterContainer/MainContainer/BGMContainer/BtnContainer" unique_id=1740962101]
+[node name="Label" type="Label" parent="Panel/PanelContainer/InnerContainer/MainContainer/BGMContainer/BtnContainer" unique_id=1740962101]
 layout_mode = 2
 text = "NO"
 
-[node name="WindContainer" type="HBoxContainer" parent="PanelContainer/CenterContainer/MainContainer" unique_id=1751842685]
+[node name="WindContainer" type="HBoxContainer" parent="Panel/PanelContainer/InnerContainer/MainContainer" unique_id=1751842685]
 layout_mode = 2
 size_flags_vertical = 4
 theme_override_constants/separation = 16
 alignment = 1
 
-[node name="Label" type="Label" parent="PanelContainer/CenterContainer/MainContainer/WindContainer" unique_id=661103410]
+[node name="Label" type="Label" parent="Panel/PanelContainer/InnerContainer/MainContainer/WindContainer" unique_id=661103410]
 layout_mode = 2
 text = "Wind Strength"
 
-[node name="OptionButton" type="OptionButton" parent="PanelContainer/CenterContainer/MainContainer/WindContainer" unique_id=1069219860]
+[node name="OptionButton" type="OptionButton" parent="Panel/PanelContainer/InnerContainer/MainContainer/WindContainer" unique_id=1069219860]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
+theme_override_fonts/font = ExtResource("4_dyq8d")
 
-[node name="BtnContainer" type="HBoxContainer" parent="PanelContainer/CenterContainer/MainContainer" unique_id=219009857]
+[node name="BtnContainer" type="HBoxContainer" parent="Panel/PanelContainer/InnerContainer" unique_id=219009857]
 layout_mode = 2
-size_flags_vertical = 6
+size_flags_vertical = 10
 theme_override_constants/separation = 28
 alignment = 1
 
-[node name="Save" type="Button" parent="PanelContainer/CenterContainer/MainContainer/BtnContainer" unique_id=2142772749]
+[node name="Save" type="Button" parent="Panel/PanelContainer/InnerContainer/BtnContainer" unique_id=2142772749]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
@@ -112,9 +174,22 @@ theme_override_fonts/font = ExtResource("4_dyq8d")
 text = "SAVE
 "
 
-[node name="Back" type="Button" parent="PanelContainer/CenterContainer/MainContainer/BtnContainer" unique_id=85616616]
+[node name="Back" type="Button" parent="Panel/PanelContainer/InnerContainer/BtnContainer" unique_id=85616616]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
 theme = ExtResource("3_1rgy2")
 text = "BACK"
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1744616713]
+visible = false
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer" unique_id=1199775870]
+material = SubResource("ShaderMaterial_y071n")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Dialog" parent="CanvasLayer" unique_id=20602851 instance=ExtResource("7_f47xe")]

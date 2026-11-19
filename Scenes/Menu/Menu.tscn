@@ -4,6 +4,29 @@
 [ext_resource type="Script" uid="uid://c6uitntgw1m30" path="res://Scripts/Menu.cs" id="1_kqkty"]
 [ext_resource type="Theme" uid="uid://mbsg4xqnedxi" path="res://Assets/Theme/kenneyUI-red.tres" id="2_3kh17"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_47xui"]
+bg_color = Color(0.21230483, 0.2123048, 0.21230495, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kqkty"]
+content_margin_left = 16.0
+content_margin_top = 8.0
+content_margin_right = 16.0
+content_margin_bottom = 8.0
+bg_color = Color(0.41960785, 0.41960785, 0.41960785, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.13682574, 0.13682574, 0.13682568, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+corner_detail = 16
+shadow_color = Color(0, 0, 0, 0.2)
+shadow_size = 28
+shadow_offset = Vector2(2, 4)
+
 [node name="Menu" type="Control" unique_id=1155775935]
 process_mode = 3
 layout_mode = 3
@@ -14,40 +37,49 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_kqkty")
 
-[node name="PanelContainer" type="PanelContainer" parent="." unique_id=1733153868]
+[node name="Panel" type="Panel" parent="." unique_id=1491609794]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_47xui")
+
+[node name="PanelContainer" type="PanelContainer" parent="Panel" unique_id=1733153868]
+custom_minimum_size = Vector2(400, 400)
+custom_maximum_size = Vector2(420, 500)
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -121.0
+offset_bottom = 121.0
+grow_horizontal = 2
+grow_vertical = 2
 theme = ExtResource("1_1kgdg")
+theme_override_styles/panel = SubResource("StyleBoxFlat_kqkty")
 
-[node name="CenterContainer" type="CenterContainer" parent="PanelContainer" unique_id=2086537285]
-layout_mode = 2
-size_flags_vertical = 4
-
-[node name="ButtonContainer" type="VBoxContainer" parent="PanelContainer/CenterContainer" unique_id=175714867]
-custom_minimum_size = Vector2(255, 0)
-custom_maximum_size = Vector2(350, -1)
+[node name="ButtonContainer" type="VBoxContainer" parent="Panel/PanelContainer" unique_id=175714867]
 clip_contents = true
 layout_mode = 2
 theme_override_constants/separation = 16
 alignment = 1
 
-[node name="Start" type="Button" parent="PanelContainer/CenterContainer/ButtonContainer" unique_id=1583049346]
+[node name="Start" type="Button" parent="Panel/PanelContainer/ButtonContainer" unique_id=1583049346]
 layout_mode = 2
 text = "START"
 
-[node name="Option" type="Button" parent="PanelContainer/CenterContainer/ButtonContainer" unique_id=285915542]
+[node name="Option" type="Button" parent="Panel/PanelContainer/ButtonContainer" unique_id=285915542]
 layout_mode = 2
 text = "OPTION"
 
-[node name="Credit" type="Button" parent="PanelContainer/CenterContainer/ButtonContainer" unique_id=1790643040]
+[node name="Credit" type="Button" parent="Panel/PanelContainer/ButtonContainer" unique_id=1790643040]
 layout_mode = 2
 text = "CREDIT"
 
-[node name="Exit" type="Button" parent="PanelContainer/CenterContainer/ButtonContainer" unique_id=1285809425]
+[node name="Exit" type="Button" parent="Panel/PanelContainer/ButtonContainer" unique_id=1285809425]
 layout_mode = 2
 theme = ExtResource("2_3kh17")
 text = "EXIT"
