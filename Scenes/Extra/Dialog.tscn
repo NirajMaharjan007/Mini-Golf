@@ -1,0 +1,97 @@
+[gd_scene format=3 uid="uid://cclgflj7ofhot"]
+
+[ext_resource type="Script" uid="uid://ctn6cfar003u3" path="res://Scripts/Dialog.cs" id="1_nykjx"]
+[ext_resource type="Shader" uid="uid://ck0gt2fov5htf" path="res://Misc/Blur.gdshader" id="2_16an0"]
+[ext_resource type="Theme" uid="uid://6shp5ck1tnja" path="res://Assets/Theme/kenneyUI.tres" id="3_o1ctr"]
+[ext_resource type="Theme" uid="uid://bnhngmri4tfgr" path="res://Assets/Theme/kenneyUI-green.tres" id="4_o1ctr"]
+[ext_resource type="FontFile" uid="uid://bs47e1f40nt53" path="res://Assets/Theme/SpicyRice-Regular.ttf" id="5_u5f6y"]
+[ext_resource type="Theme" uid="uid://mbsg4xqnedxi" path="res://Assets/Theme/kenneyUI-red.tres" id="5_ydvg4"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_a037c"]
+bg_color = Color(0.42352942, 0.42352942, 0.42352942, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.18431373, 0.18431373, 0.18431373, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+corner_detail = 16
+shadow_color = Color(0, 0, 0, 0.38431373)
+shadow_size = 28
+shadow_offset = Vector2(8, 4)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_rh6kn"]
+shader = ExtResource("2_16an0")
+shader_parameter/sigma = 4.0
+shader_parameter/radius = 8
+shader_parameter/opacity = 1.0
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_7232d"]
+content_margin_left = 16.0
+content_margin_top = 4.0
+content_margin_right = 16.0
+content_margin_bottom = 4.0
+
+[node name="Dialog" type="Panel" unique_id=20602851]
+process_mode = 3
+process_priority = 1
+custom_minimum_size = Vector2(200, 128)
+custom_maximum_size = Vector2(250, 150)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 6
+size_flags_vertical = 6
+theme_override_styles/panel = SubResource("StyleBoxFlat_a037c")
+script = ExtResource("1_nykjx")
+
+[node name="Outerpanel" type="PanelContainer" parent="." unique_id=969877473]
+material = SubResource("ShaderMaterial_rh6kn")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_7232d")
+
+[node name="InnerContainer" type="VBoxContainer" parent="Outerpanel" unique_id=1417176574]
+layout_mode = 2
+theme_override_constants/separation = 24
+
+[node name="TitleContainer" type="VBoxContainer" parent="Outerpanel/InnerContainer" unique_id=943132399]
+layout_mode = 2
+size_flags_vertical = 10
+theme = ExtResource("3_o1ctr")
+alignment = 1
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Outerpanel/InnerContainer/TitleContainer" unique_id=952627310]
+layout_mode = 2
+text = "ARE  YOU  SURE !!!!"
+fit_content = true
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ConfirmCotainer" type="HBoxContainer" parent="Outerpanel/InnerContainer" unique_id=1417550464]
+layout_mode = 2
+size_flags_vertical = 2
+alignment = 1
+
+[node name="Yes" type="Button" parent="Outerpanel/InnerContainer/ConfirmCotainer" unique_id=2001400970]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("4_o1ctr")
+theme_override_fonts/font = ExtResource("5_u5f6y")
+text = "YES"
+
+[node name="No" type="Button" parent="Outerpanel/InnerContainer/ConfirmCotainer" unique_id=993151880]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("5_ydvg4")
+text = "NO"
