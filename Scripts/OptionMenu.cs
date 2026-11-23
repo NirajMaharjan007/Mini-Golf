@@ -10,6 +10,9 @@ public partial class OptionMenu : Control
     private bool sfxEnable,
         bgmEnabled;
 
+    private AudioStreamPlayer clickSFX,
+        backSFX;
+
     private OptionButton windStrength;
 
     private CheckButton sfxBtn,
@@ -39,6 +42,9 @@ public partial class OptionMenu : Control
 
     public override void _Ready()
     {
+        clickSFX = GetNode<AudioStreamPlayer>("Click");
+        backSFX = GetNode<AudioStreamPlayer>("Back");
+
         var optionBtnContainer = GetNode<HBoxContainer>(
             "Panel/PanelContainer/InnerContainer/BtnContainer"
         );
@@ -104,17 +110,20 @@ public partial class OptionMenu : Control
 
     private async void HandleBack()
     {
+        backSFX.Play();
         await SceneManager.ChangeScene("res://Scenes/Menu/Menu.tscn");
     }
 
     private void OnBackDialog()
     {
-        dialogCanvas.Visible = !dialog.Visible;
+        dialogCanvas.Visible = false;
+        backSFX.Play();
     }
 
     private void HandleSave()
     {
         dialogCanvas.Visible = true;
+        clickSFX.Play();
     }
 
     private void OnWindSelection(long index)

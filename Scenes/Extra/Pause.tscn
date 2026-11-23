@@ -4,6 +4,8 @@
 [ext_resource type="Theme" uid="uid://6shp5ck1tnja" path="res://Assets/Theme/kenneyUI.tres" id="2_4hvdk"]
 [ext_resource type="Theme" uid="uid://mbsg4xqnedxi" path="res://Assets/Theme/kenneyUI-red.tres" id="2_fpcad"]
 [ext_resource type="Shader" uid="uid://ck0gt2fov5htf" path="res://Misc/Blur.gdshader" id="2_jfxj7"]
+[ext_resource type="AudioStream" uid="uid://di6bt83o6sfeb" path="res://Assets/SFX/click.mp3" id="5_6x7ge"]
+[ext_resource type="AudioStream" uid="uid://dr3y8m57alewa" path="res://Assets/SFX/cancel.mp3" id="6_a037c"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_a037c"]
 bg_color = Color(0.42352942, 0.42352942, 0.42352942, 1)
@@ -92,3 +94,15 @@ text = "BACK TO MENU"
 layout_mode = 2
 theme = ExtResource("2_fpcad")
 text = "EXIT"
+
+[node name="Click" type="AudioStreamPlayer" parent="." unique_id=1524707178]
+stream = ExtResource("5_6x7ge")
+volume_db = 0.5
+pitch_scale = 2.0
+bus = &"SFX"
+
+[node name="Back" type="AudioStreamPlayer" parent="." unique_id=2130068094]
+stream = ExtResource("6_a037c")
+volume_db = 0.2
+pitch_scale = 1.2
+bus = &"SFX"

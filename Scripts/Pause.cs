@@ -13,9 +13,15 @@ public partial class Pause : Panel
         backBtn,
         exitBtn;
 
+    private AudioStreamPlayer clickSFX,
+        backSFX;
+
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
+        clickSFX = GetNode<AudioStreamPlayer>("Click");
+        backSFX = GetNode<AudioStreamPlayer>("Back");
+
         var btnContainer = GetNode<VBoxContainer>("Outerpanel/InnerContainer/BtnContainer");
 
         resumeBtn = btnContainer.GetNode<Button>("Resume");
@@ -32,6 +38,7 @@ public partial class Pause : Panel
     {
         try
         {
+            clickSFX.Play();
             SceneManager.NextScene = "res://Scenes/Menu/Menu.tscn";
             await SceneManager.LoadingScene();
         }
@@ -44,11 +51,13 @@ public partial class Pause : Panel
 
     private void HandleResume()
     {
+        clickSFX.Play();
         EmitSignal(SignalName.ResumeRequested);
     }
 
     private async void HandleExit()
     {
+        backSFX.Play();
         await SceneManager.ExitScene();
     }
 

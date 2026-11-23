@@ -3,6 +3,8 @@
 [ext_resource type="Theme" uid="uid://6shp5ck1tnja" path="res://Assets/Theme/kenneyUI.tres" id="1_1kgdg"]
 [ext_resource type="Script" uid="uid://c6uitntgw1m30" path="res://Scripts/Menu.cs" id="1_kqkty"]
 [ext_resource type="Theme" uid="uid://mbsg4xqnedxi" path="res://Assets/Theme/kenneyUI-red.tres" id="2_3kh17"]
+[ext_resource type="AudioStream" uid="uid://di6bt83o6sfeb" path="res://Assets/SFX/click.mp3" id="4_kulhe"]
+[ext_resource type="AudioStream" uid="uid://dr3y8m57alewa" path="res://Assets/SFX/cancel.mp3" id="5_l7xyq"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_47xui"]
 bg_color = Color(0.21230483, 0.2123048, 0.21230495, 1)
@@ -83,3 +85,15 @@ text = "CREDIT"
 layout_mode = 2
 theme = ExtResource("2_3kh17")
 text = "EXIT"
+
+[node name="Click" type="AudioStreamPlayer" parent="." unique_id=1485380988]
+stream = ExtResource("4_kulhe")
+volume_db = 0.5
+pitch_scale = 2.0
+bus = &"SFX"
+
+[node name="Back" type="AudioStreamPlayer" parent="." unique_id=628653476]
+stream = ExtResource("5_l7xyq")
+volume_db = 0.2
+pitch_scale = 1.2
+bus = &"SFX"

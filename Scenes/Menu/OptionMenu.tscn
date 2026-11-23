@@ -7,6 +7,8 @@
 [ext_resource type="FontFile" uid="uid://bs47e1f40nt53" path="res://Assets/Theme/SpicyRice-Regular.ttf" id="4_dyq8d"]
 [ext_resource type="Shader" uid="uid://ck0gt2fov5htf" path="res://Misc/Blur.gdshader" id="6_sovmg"]
 [ext_resource type="PackedScene" uid="uid://cclgflj7ofhot" path="res://Scenes/Extra/Dialog.tscn" id="7_f47xe"]
+[ext_resource type="AudioStream" uid="uid://di6bt83o6sfeb" path="res://Assets/SFX/click.mp3" id="8_0we7m"]
+[ext_resource type="AudioStream" uid="uid://dr3y8m57alewa" path="res://Assets/SFX/cancel.mp3" id="9_mbwfw"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1rgy2"]
 bg_color = Color(0.21230483, 0.2123048, 0.21230495, 1)
@@ -193,3 +195,15 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Dialog" parent="CanvasLayer" unique_id=20602851 instance=ExtResource("7_f47xe")]
+
+[node name="Click" type="AudioStreamPlayer" parent="." unique_id=416374294]
+stream = ExtResource("8_0we7m")
+volume_db = 0.5
+pitch_scale = 2.0
+bus = &"SFX"
+
+[node name="Back" type="AudioStreamPlayer" parent="." unique_id=2123841452]
+stream = ExtResource("9_mbwfw")
+volume_db = 0.2
+pitch_scale = 1.2
+bus = &"SFX"
