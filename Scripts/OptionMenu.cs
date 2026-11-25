@@ -31,6 +31,8 @@ public partial class OptionMenu : Control
     {
         base._EnterTree();
 
+        Configuration.Load();
+
         dialogCanvas = GetNode<CanvasLayer>("CanvasLayer");
         dialogCanvas.Visible = false;
 

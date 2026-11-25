@@ -14,6 +14,15 @@ public partial class Menu : Control
     private AudioStreamPlayer clickSFX,
         backSFX;
 
+    public override void _EnterTree()
+    {
+        base._EnterTree();
+
+        Configuration.Load();
+
+        Print($"Loader {Configuration.DebugValueString}");
+    }
+
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
